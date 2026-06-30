@@ -1,0 +1,208 @@
+nfr_questionnaire:
+  title: "Performance NFR Discovery Questionnaire"
+  description: "Standard questions for gathering non-functional requirements during Teams meetings with project teams. Tailored for backend billing applications and core middleware services."
+  version: "1.0"
+
+  sections:
+    - id: PROJECT_OVERVIEW
+      title: "Project Overview"
+      questions:
+        - id: Q01
+          question: "What is the project name and brief description?"
+          purpose: "Establish scope and context"
+          expected_answer_type: text
+
+        - id: Q02
+          question: "What is the planned go-live date?"
+          purpose: "Determine timeline constraints for test planning"
+          expected_answer_type: date
+
+        - id: Q03
+          question: "Is this a new application, major release, or incremental update?"
+          purpose: "Classify change magnitude for effort estimation"
+          expected_answer_type: choice
+          options: ["New application", "Major release", "Minor release", "Patch/hotfix"]
+
+        - id: Q04
+          question: "Which environments are available for performance testing? (DEV, SIT, UAT, Pre-Prod, Prod-like)"
+          purpose: "Identify test environment constraints"
+          expected_answer_type: multi_choice
+          options: ["DEV", "SIT", "UAT", "Pre-Prod", "Prod-like"]
+
+    - id: ARCHITECTURE
+      title: "Architecture & Integration"
+      questions:
+        - id: Q05
+          question: "Walk us through the high-level architecture - what are the major components and how do they interact?"
+          purpose: "Map system topology for script design and workload modeling"
+          expected_answer_type: text
+          hld_reference: true
+
+        - id: Q06
+          question: "What backend services are in scope? (APIs, microservices, batch jobs, message queues)"
+          purpose: "Identify components to include in performance test scope"
+          expected_answer_type: text
+
+        - id: Q07
+          question: "What databases are involved and what are the expected data volumes?"
+          purpose: "Data prep sizing and database performance baseline"
+          expected_answer_type: text
+
+        - id: Q08
+          question: "What external integrations or third-party services does this application call?"
+          purpose: "Identify stub/mock requirements and integration test scope"
+          expected_answer_type: text
+
+        - id: Q09
+          question: "What middleware or messaging platforms are used? (Kafka, MQ, RabbitMQ, etc.)"
+          purpose: "Middleware-specific test scenario design"
+          expected_answer_type: text
+
+        - id: Q10
+          question: "Is there a CDN, API gateway, or load balancer in the path? If so, which?"
+          purpose: "Network topology for realistic test configuration"
+          expected_answer_type: text
+
+    - id: WORKLOAD_PROFILE
+      title: "Workload & User Profile"
+      questions:
+        - id: Q11
+          question: "What is the expected number of concurrent users at normal load?"
+          purpose: "Baseline workload model"
+          expected_answer_type: number
+          unit: "concurrent users"
+
+        - id: Q12
+          question: "What is the expected peak concurrent users? When does peak typically occur?"
+          purpose: "Peak load test scenario design"
+          expected_answer_type: text
+
+        - id: Q13
+          question: "What is the expected transaction volume per hour/day at normal and peak?"
+          purpose: "Throughput targets for test scenarios"
+          expected_answer_type: text
+
+        - id: Q14
+          question: "What are the critical business transactions? (e.g., billing cycle run, payment processing, order submission, account lookup)"
+          purpose: "Priority transaction identification for script design"
+          expected_answer_type: text
+
+        - id: Q15
+          question: "Are there batch processing windows? What is the expected batch volume and SLA?"
+          purpose: "Batch job execution test planning"
+          expected_answer_type: text
+
+        - id: Q16
+          question: "What is the expected data growth rate over the next 12-24 months?"
+          purpose: "Capacity planning and endurance test design"
+          expected_answer_type: text
+
+    - id: PERFORMANCE_TARGETS
+      title: "Performance Targets & SLAs"
+      questions:
+        - id: Q17
+          question: "What are the response time targets for critical transactions? (e.g., API calls < 2s, batch jobs < 4 hours)"
+          purpose: "Pass/fail criteria for test execution"
+          expected_answer_type: text
+
+        - id: Q18
+          question: "What is the target availability/uptime SLA? (e.g., 99.9%, 99.99%)"
+          purpose: "Resilience and stress test design"
+          expected_answer_type: text
+
+        - id: Q19
+          question: "What is the maximum acceptable error rate under load? (e.g., < 1%)"
+          purpose: "Error threshold for test pass/fail criteria"
+          expected_answer_type: percentage
+
+        - id: Q20
+          question: "Are there specific throughput targets? (e.g., X transactions per second)"
+          purpose: "Throughput validation criteria"
+          expected_answer_type: text
+
+        - id: Q21
+          question: "What are the CPU and memory utilization thresholds? (e.g., CPU < 70%, Memory < 80%)"
+          purpose: "Server-side resource monitoring thresholds"
+          expected_answer_type: text
+
+    - id: BILLING_SPECIFIC
+      title: "Billing & Middleware Specific"
+      questions:
+        - id: Q22
+          question: "Describe the billing cycle process - frequency, volume of accounts processed, and end-to-end SLA."
+          purpose: "Billing batch job test scenario design"
+          expected_answer_type: text
+
+        - id: Q23
+          question: "What payment gateways or payment processing systems are integrated?"
+          purpose: "Payment flow test scope and stub requirements"
+          expected_answer_type: text
+
+        - id: Q24
+          question: "Are there rate-limiting or throttling mechanisms on any APIs or services?"
+          purpose: "Test design constraints and realistic load patterns"
+          expected_answer_type: text
+
+        - id: Q25
+          question: "What is the expected message throughput for middleware queues under peak?"
+          purpose: "Message queue performance test targets"
+          expected_answer_type: text
+
+        - id: Q26
+          question: "Are there any scheduled jobs or cron tasks that could impact performance during test windows?"
+          purpose: "Test scheduling and interference avoidance"
+          expected_answer_type: text
+
+    - id: DATA_AND_SECURITY
+      title: "Data & Security Requirements"
+      questions:
+        - id: Q27
+          question: "What test data is needed? Can production data be masked/anonymized, or do we need synthetic data?"
+          purpose: "Data preparation approach and effort"
+          expected_answer_type: text
+
+        - id: Q28
+          question: "What authentication/authorization mechanisms are used? (OAuth, JWT, API keys, certificates)"
+          purpose: "Script design for authenticated scenarios"
+          expected_answer_type: text
+
+        - id: Q29
+          question: "Are there any data encryption requirements that could impact performance? (TLS, field-level encryption)"
+          purpose: "Performance overhead assessment"
+          expected_answer_type: text
+
+        - id: Q30
+          question: "What is the data retention policy and does it affect test data cleanup?"
+          purpose: "Post-test cleanup planning"
+          expected_answer_type: text
+
+    - id: CONSTRAINTS
+      title: "Constraints & Risks"
+      questions:
+        - id: Q31
+          question: "Are there any known performance bottlenecks or concerns from previous releases?"
+          purpose: "Targeted test scenario design"
+          expected_answer_type: text
+
+        - id: Q32
+          question: "What monitoring tools are available? (APM, log aggregation, infrastructure monitoring)"
+          purpose: "Test observation and analysis tooling"
+          expected_answer_type: text
+
+        - id: Q33
+          question: "Are there environment-specific constraints? (shared environments, limited resources, network restrictions)"
+          purpose: "Test execution planning and risk mitigation"
+          expected_answer_type: text
+
+        - id: Q34
+          question: "Who are the key contacts for environment access, deployment, and issue escalation?"
+          purpose: "Communication plan for test execution phase"
+          expected_answer_type: text
+
+  transcript_extraction_hints:
+    - "Look for answers following each question or topic area"
+    - "Capture numeric values with their units (users, TPS, seconds, percentage)"
+    - "Note any 'TBD' or 'we need to check' responses as open items"
+    - "Record disagreements or uncertainties as risks"
+    - "Extract architecture diagrams references or whiteboard descriptions from HLD walkthrough"
+    - "Capture any mentioned tools, technologies, or platform versions"

@@ -1,0 +1,128 @@
+perf_activities:
+  - id: ANALYSIS
+    name: Analysis
+    base_time_minutes: 720
+    base_time_days: 1.50
+    default_complexity: medium
+
+  - id: ASSESSMENT
+    name: Assessment
+    base_time_minutes: 720
+    base_time_days: 1.50
+    default_complexity: medium
+
+  - id: BATCH_JOB_EXEC
+    name: Batch Job Execution
+    base_time_minutes: 720
+    base_time_days: 1.50
+    default_complexity: medium
+
+  - id: DATA_PREP
+    name: Data Prep
+    base_time_minutes: 422
+    base_time_days: 0.88
+    default_complexity: medium
+
+  - id: DEFECTS_MGMT
+    name: Defects Management
+    base_time_minutes: 1920
+    base_time_days: 4.01
+    default_complexity: medium
+
+  - id: EXEC_PEAK_LOAD
+    name: Execution - Peak Load
+    base_time_minutes: 845
+    base_time_days: 1.76
+    default_complexity: peak_load
+
+  - id: EXEC_STRESS
+    name: Execution - Stress Test
+    base_time_minutes: 845
+    base_time_days: 1.76
+    default_complexity: stress_test
+
+  - id: HP_PC_SUPPORT
+    name: HP PC Support
+    base_time_minutes: 480
+    base_time_days: 1.00
+    default_complexity: hp_pc_support
+
+  - id: PLANNING
+    name: Planning
+    base_time_minutes: 1440
+    base_time_days: 3.01
+    default_complexity: medium
+
+  - id: REPORTING
+    name: Reporting
+    base_time_minutes: 1200
+    base_time_days: 2.51
+    default_complexity: medium
+
+  - id: SCRIPT_DESIGN
+    name: Script Design
+    base_time_minutes: 960
+    base_time_days: 2.00
+    default_complexity: complex
+
+complexity_multipliers:
+  simple: 0.5
+  medium: 1.0
+  complex: 2.0
+  peak_load: 1.0
+  stress_test: 1.0
+  hp_pc_support: 1.0
+
+default_units:
+  small:
+    ANALYSIS: 1
+    ASSESSMENT: 1
+    BATCH_JOB_EXEC: 1
+    DATA_PREP: 1
+    DEFECTS_MGMT: 1
+    EXEC_PEAK_LOAD: 1
+    EXEC_STRESS: 1
+    HP_PC_SUPPORT: 1
+    PLANNING: 1
+    REPORTING: 1
+    SCRIPT_DESIGN: 2
+  medium:
+    ANALYSIS: 2
+    ASSESSMENT: 1
+    BATCH_JOB_EXEC: 2
+    DATA_PREP: 1
+    DEFECTS_MGMT: 2
+    EXEC_PEAK_LOAD: 2
+    EXEC_STRESS: 1
+    HP_PC_SUPPORT: 2
+    PLANNING: 1
+    REPORTING: 2
+    SCRIPT_DESIGN: 6
+  large:
+    ANALYSIS: 3
+    ASSESSMENT: 2
+    BATCH_JOB_EXEC: 3
+    DATA_PREP: 2
+    DEFECTS_MGMT: 3
+    EXEC_PEAK_LOAD: 3
+    EXEC_STRESS: 2
+    HP_PC_SUPPORT: 3
+    PLANNING: 2
+    REPORTING: 3
+    SCRIPT_DESIGN: 10
+
+project_size_rules:
+  small:
+    max_in_scope: 5
+    max_use_cases: 5
+    max_data_entities: 3
+  medium:
+    max_in_scope: 15
+    max_use_cases: 15
+  large:
+    min_in_scope: 16
+    min_use_cases: 16
+
+efficiency_percentage: 19
+cost_per_person_day: 250
+minutes_per_day: 480
